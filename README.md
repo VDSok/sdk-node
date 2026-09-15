@@ -1,7 +1,7 @@
 # @vdsok/sdk
 
 [![npm](https://img.shields.io/npm/v/%40vdsok%2Fsdk)](https://www.npmjs.com/package/@vdsok/sdk)
-[![license](https://img.shields.io/github/license/VDSok/sdk-node)](https://github.com/VDSok/sdk-node/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![node](https://img.shields.io/node/v/%40vdsok%2Fsdk)](https://nodejs.org)
 [![API docs](https://img.shields.io/badge/docs-vdsok.guru%2Fdevelopers-blue)](https://vdsok.guru/developers)
 

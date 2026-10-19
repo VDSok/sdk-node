@@ -1,0 +1,45 @@
+name: Publish to npm
+
+# Публикация через npm Trusted Publishing (OIDC): без NPM_TOKEN и одноразовых
+# кодов. На npmjs.com у пакета @vdsok/sdk связь настроена на этот файл —
+# переименуете его, придётся пересоздать связь там.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Trusted Publishing требует npm >= 11.5.1, в Node 24 он из коробки.
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Check version
+        id: version
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if [ "${{ github.event_name }}" = "release" ] && [ "${{ github.event.release.tag_name }}" != "v$version" ]; then
+            echo "Тег ${{ github.event.release.tag_name }} не совпадает с package.json ($version)" >&2
+            exit 1
+          fi
+          if npm view "@vdsok/sdk@$version" version >/dev/null 2>&1; then
+            echo "@vdsok/sdk@$version уже в npm, публиковать нечего"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - run: npm ci
+        if: steps.version.outputs.skip != 'true'
+
+      # prepublishOnly соберёт dist и прогонит тесты ещё раз.
+      - run: npm publish --access public
+        if: steps.version.outputs.skip != 'true'

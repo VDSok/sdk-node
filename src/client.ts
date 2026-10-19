@@ -126,7 +126,11 @@ export class Transport {
     }
     this.#apiKey = apiKey.trim();
     // Без завершающего слэша, чтобы path всегда начинался с "/" и не было "//".
-    this.baseUrl = (options.baseUrl ?? DEFAULT_BASE_URL).replace(/\/+$/, "");
+    // Не регуляркой: /\/+$/ квадратичная на строке из множества "/" (CodeQL js/polynomial-redos).
+    const baseUrl = options.baseUrl ?? DEFAULT_BASE_URL;
+    let end = baseUrl.length;
+    while (end > 0 && baseUrl[end - 1] === "/") end--;
+    this.baseUrl = baseUrl.slice(0, end);
     this.timeout = options.timeout ?? DEFAULT_TIMEOUT_MS;
     this.maxRetries = options.maxRetries ?? DEFAULT_MAX_RETRIES;
     this.maxRetryDelay = options.maxRetryDelay ?? DEFAULT_MAX_RETRY_DELAY_MS;

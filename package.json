@@ -1,6 +1,6 @@
 {
   "name": "@vdsok/sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Official Node.js / TypeScript SDK for the VDSok Client API v1 (servers, domains, balance, invoices, webhooks).",
   "keywords": [
     "vdsok",

@@ -4,6 +4,12 @@ All notable changes to `@vdsok/sdk` are recorded here. The SDK follows the
 VDSok Client API: 1.x tracks `/api/v1`; a breaking API change becomes `/v2`
 and a new major version of this package.
 
+## 1.0.2
+
+- Trailing slashes are stripped from `baseUrl` with a loop instead of the
+  `/\/+$/` regex, which took quadratic time on a string of many slashes
+  (CodeQL `js/polynomial-redos`). Behaviour is unchanged.
+
 ## 1.0.1
 
 - `servers.create()` / `servers.reinstall()`: the documented root password

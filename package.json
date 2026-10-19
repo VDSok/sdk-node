@@ -1,8 +1,17 @@
 {
   "name": "@vdsok/sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official Node.js / TypeScript SDK for the VDSok Client API v1 (servers, domains, balance, invoices, webhooks).",
-  "keywords": ["vdsok", "vds", "vps", "hosting", "api", "sdk", "domains", "billing"],
+  "keywords": [
+    "vdsok",
+    "vds",
+    "vps",
+    "hosting",
+    "api",
+    "sdk",
+    "domains",
+    "billing"
+  ],
   "homepage": "https://github.com/VDSok/sdk-node#readme",
   "bugs": {
     "url": "https://github.com/VDSok/sdk-node/issues",
@@ -54,11 +63,15 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^20.14.0",
+    "@types/node": "^22.20.4",
     "openapi-typescript": "^7.4.0",
     "tsup": "^8.3.0",
     "typescript": "^5.5.0",
-    "vitest": "^2.1.0",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.2",
     "yaml": "^2.5.0"
+  },
+  "overrides": {
+    "esbuild": "^0.28.2"
   }
 }

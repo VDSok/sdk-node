@@ -4,6 +4,14 @@ All notable changes to `@vdsok/sdk` are recorded here. The SDK follows the
 VDSok Client API: 1.x tracks `/api/v1`; a breaking API change becomes `/v2`
 and a new major version of this package.
 
+## 1.0.1
+
+- `servers.create()` / `servers.reinstall()`: the documented root password
+  limit is now 8–20 characters (was 8–64). The API has rejected longer
+  passwords since 2026-10-18, because the hypervisor panel refuses them;
+  a longer password now fails with `400 validation_error` up front instead
+  of a paid order that cannot be provisioned. No code changes.
+
 ## 1.0.0
 
 First public release, covering the whole Client API v1.
